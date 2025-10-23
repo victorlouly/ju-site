@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jullieta AI - Assistente Financeiro Inteligente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-white {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview,
+        .video-demo-section {
+            background: white;
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            background: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .dashboard-card {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* AI Section */
+        .ai-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 3rem;
+            margin: 80px auto;
+            max-width: 1200px;
+        }
+
+        .ai-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .ai-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-features {
+            list-style: none;
+        }
+
+        .ai-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ai-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            font-size: 1.5rem;
+        }
+
+        /* How It Works */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .step-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* WhatsApp Demo */
+        .whatsapp-demo {
+            background: #f5f7fa;
+            padding: 80px 2rem;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .chat-header {
+            background: #25D366;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .chat-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chat-status {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            padding: 2rem;
+            background: #ece5dd;
+            min-height: 400px;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .message-sent {
+            text-align: right;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message-sent .message-bubble {
+            background: #dcf8c6;
+            text-align: left;
+        }
+
+        .message-received .message-bubble {
+            background: white;
+            text-align: left;
+        }
+
+        .demo-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .demo-step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: white;
+            padding: 80px 2rem;
+        }
+
+        .testimonial-card {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem;
+            background: #f5f7fa;
+            border-radius: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .stars {
+            font-size: 1.5rem;
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 2rem;
+            margin-top: 80px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .ai-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid,
+            .steps-container,
+            .demo-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Jullieta AI</div>
+            <div class="nav-links">
+                <a href="#recursos">Recursos</a>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#contato">Contato</a>
+                <a href="#" class="btn-primary">Teste Grátis</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Jullieta AI</h1>
+            <p class="subtitle">Assistente Financeiro Inteligente</p>
+            <p class="description">Suas finanças no WhatsApp<br>
+            Controle completo das suas finanças através de conversas naturais. Jullieta entende você e cuida do seu dinheiro 24/7.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-hero btn-white">Teste Grátis</a>
+                <a href="#dashboard" class="btn-hero btn-outline">Explorar Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Demo Section -->
+    <section class="video-demo-section" id="dashboard">
+        <h2 class="section-title">Dashboard Completo</h2>
+        <p class="section-subtitle">Visualize todas as suas métricas financeiras em um painel intuitivo e completo</p>
+        
+        <div class="video-container">
+            <video controls muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='600' viewBox='0 0 1000 600'%3E%3Crect width='1000' height='600' fill='%23667eea'/%3E%3Ctext x='500' y='300' text-anchor='middle' fill='white' font-size='24' font-family='Arial'%3EDashboard Demo%3C/text%3E%3C/svg%3E">
+                <source src="demo-video.mp4" type="video/mp4">
+                <div style="padding: 2rem; text-align: center; color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h3>Dashboard Demo</h3>
+                    <p>Vídeo demonstrativo do dashboard será disponibilizado em breve</p>
+                    <div style="font-size: 3rem; margin: 1rem 0;">📊</div>
+                </div>
+            </video>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-label">Receitas</div>
+                    <div class="metric-value">R$ 5.430</div>
+                    <p class="metric-label">Acompanhe todas as entradas</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">💸</div>
+                    <div class="metric-label">Gastos</div>
+                    <div class="metric-value">R$ 3.210</div>
+                    <p class="metric-label">Controle total das despesas</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">💎</div>
+                    <div class="metric-label">Economia</div>
+                    <div class="metric-value">R$ 2.220</div>
+                    <p class="metric-label">Veja quanto você economizou</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-label">Insights</div>
+                    <div class="metric-value">12</div>
+                    <p class="metric-label">Análises inteligentes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="recursos">
+        <h2 class="section-title">Simples. Inteligente. Eficaz.</h2>
+        <p class="section-subtitle">Recursos pensados para tornar o controle financeiro natural e intuitivo</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>WhatsApp Nativo</h3>
+                <p>Use a interface que você já conhece. Registre gastos com comandos naturais.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎤</div>
+                <h3>Comandos por Voz</h3>
+                <p>Envie áudios e nossa IA transcreve automaticamente. Perfeito para o dia a dia.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>IA Avançada</h3>
+                <p>Jullieta nunca responde "não entendi". Análise contextual e insights personalizados.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>Análise de Imagens</h3>
+                <p>Fotografe notas fiscais e nossa IA extrai valores e categorias automaticamente.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Metas Inteligentes</h3>
+                <p>Defina objetivos e receba acompanhamento automático do seu progresso.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Tempo Real</h3>
+                <p>Respostas instantâneas com feedback imediato sobre orçamentos e gastos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Section -->
+    <div class="ai-section">
+        <div class="ai-content">
+            <div class="ai-text">
+                <h2>IA Real. Não é um bot.</h2>
+                <p style="margin-bottom: 2rem;">Jullieta é uma inteligência artificial de verdade que conversa com você naturalmente. Ela entende contexto, analisa seus padrões financeiros e responde qualquer pergunta sobre suas finanças.</p>
+                
+                <ul class="ai-features">
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <div>
+                            <strong>Conversação Natural</strong><br>
+                            <small>Não são respostas prontas. A IA analisa seu contexto e oferece insights personalizados</small>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <div>
+                            <strong>Entende Áudios</strong><br>
+                            <small>Processa comandos de voz e registra gastos automaticamente</small>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <div>
+                            <strong>Análise Inteligente</strong><br>
+                            <small>Calcula médias, identifica padrões e sugere melhorias nos seus hábitos</small>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="ai-visual">
+                <div style="font-size: 10rem; text-align: center;">🧠</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section id="como-funciona">
+        <h2 class="section-title">Como funciona</h2>
+        <p class="section-subtitle">Três passos para transformar suas finanças</p>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Conecte</h3>
+                <p>Adicione nosso número no WhatsApp e comece a conversar</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Converse</h3>
+                <p>Registre gastos naturalmente: "50 reais supermercado"</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Evolua</h3>
+                <p>Receba insights e tome decisões financeiras mais inteligentes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Demo -->
+    <section class="whatsapp-demo">
+        <h2 class="section-title">Como Funciona a Integração com WhatsApp</h2>
+        <p class="section-subtitle">Veja como nossa IA processa suas mensagens em tempo real</p>
+        
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-info">
+                    <h3>Jullieta AI</h3>
+                    <div class="chat-status">Online</div>
+                </div>
+            </div>
+            
+            <div class="chat-messages">
+                <div class="message message-sent">
+                    <div class="message-bubble">
+                        Recebi R$ 2000 de salário
+                    </div>
+                </div>
+                
+                <div class="message message-received">
+                    <div class="message-bubble">
+                        Receita de R$ 2000,00 adicionada à categoria Salário. Seu saldo atual é R$ 2000,00. 💰
+                    </div>
+                </div>
+                
+                <div class="message message-sent">
+                    <div class="message-bubble">
+                        Paguei R$ 500 de aluguel
+                    </div>
+                </div>
+                
+                <div class="message message-received">
+                    <div class="message-bubble">
+                        Despesa de R$ 500,00 adicionada à categoria Moradia. Seu saldo atual é R$ 1500,00. 🏠
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-steps">
+            <div class="demo-step">
+                <div class="demo-step-number">1</div>
+                <h3>Envie uma Mensagem, Áudio ou Foto</h3>
+                <p>Simplesmente envie uma mensagem para o Jullieta AI no WhatsApp com seus gastos ou receitas.</p>
+            </div>
+            
+            <div class="demo-step">
+                <div class="demo-step-number">2</div>
+                <h3>IA Processa a Informação</h3>
+                <p>Nossa IA analisa sua mensagem e categoriza automaticamente a transação.</p>
+            </div>
+            
+            <div class="demo-step">
+                <div class="demo-step-number">3</div>
+                <h3>Atualização Automática</h3>
+                <p>Seus dados financeiros são atualizados instantaneamente no sistema.</p>
+            </div>
+            
+            <div class="demo-step">
+                <div class="demo-step-number">4</div>
+                <h3>Confirmação Imediata</h3>
+                <p>Receba uma confirmação instantânea de que sua transação foi registrada.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <h2 class="section-title">Resultados reais</h2>
+        
+        <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"Finalmente consegui controlar meus gastos. O WhatsApp torna tudo muito mais fácil e natural."</p>
+            <p class="testimonial-author">Maria Silva</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Pronto para começar?</h2>
+        <p>Transforme suas finanças hoje mesmo</p>
+        <a href="#" class="btn-hero btn-white">Teste Grátis Agora</a>
+        
+        <div class="cta-features">
+            <div class="cta-feature">
+                <span>✓</span>
+                <span>Sem compromisso</span>
+            </div>
+            <div class="cta-feature">
+                <span>✓</span>
+                <span>Suporte 24/7</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">Jullieta AI</div>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 1rem;">
+                    Assistente financeiro inteligente que transforma a maneira como você gerencia seu dinheiro.
+                </p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem;">Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Privacidade</a></li>
+                    <li><a href="#">Suporte</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem;">Contato</h4>
+                <ul class="footer-links">
+                    <li><a href="#">contato@jullieta.ai</a></li>
+                    <li><a href="#">WhatsApp: (11) 9999-9999</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 Jullieta AI. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step-card, .metric-card, .demo-step').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Simulate chat messages appearing
+        const messages = document.querySelectorAll('.message');
+        messages.forEach((msg, index) => {
+            msg.style.opacity = '0';
+            setTimeout(() => {
+                msg.style.opacity = '1';
+                msg.style.animation = 'slideIn 0.4s ease forwards';
+            }, index * 800);
+        });
+    </script>
+</body>
+</html>
