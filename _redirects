@@ -1,0 +1,9 @@
+# Redirects para SPA (Single Page Application)
+/*    /index.html   200
+
+# Headers de segurança
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
